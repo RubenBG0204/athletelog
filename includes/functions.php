@@ -91,13 +91,19 @@ function validateRegistration(
         );
     }
 
-    // Usuario: solo letras, números y _. El modificador D evita que "$" acepte un salto de línea final.
-    $usernamePattern = sprintf('/^[A-Za-z0-9_]{%d,%d}$/D', $rules['username_min'], $rules['username_max']);
+    // Usuario: solo letras, números y _.
+    // El modificador D evita que "$" acepte un salto de línea final.
+    $usernamePattern = sprintf(
+        '/^[A-Za-z0-9_]{%d,%d}$/D',
+        $rules['username_min'],
+        $rules['username_max']
+    );
     if ($values['username'] === '') {
         $errors['username'] = 'El usuario es obligatorio.';
     } elseif (preg_match($usernamePattern, $values['username']) !== 1) {
         $errors['username'] = sprintf(
-            'El usuario debe tener entre %d y %d caracteres y solo puede contener letras, números y guion bajo (_).',
+            'El usuario debe tener entre %d y %d caracteres '
+            . 'y solo puede contener letras, números y guion bajo (_).',
             $rules['username_min'],
             $rules['username_max']
         );
@@ -112,7 +118,10 @@ function validateRegistration(
 
     // Contraseña: longitud mínima y repetición idéntica.
     if (mb_strlen($values['password']) < $rules['password_min']) {
-        $errors['password'] = sprintf('La contraseña debe tener al menos %d caracteres.', $rules['password_min']);
+        $errors['password'] = sprintf(
+            'La contraseña debe tener al menos %d caracteres.',
+            $rules['password_min']
+        );
     }
     if ($values['password2'] !== $values['password']) {
         $errors['password2'] = 'Las contraseñas no coinciden.';
