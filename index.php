@@ -16,6 +16,7 @@ require_once __DIR__ . '/includes/navbar.php';
             anota cada sesión, consulta tu historial y entrena con método.
         </p>
         <a class="button" href="register.php">Crear mi cuenta</a>
+        <a class="button button-secondary" href="sports.php">Ver deportes</a>
     </section>
 
     <section class="feature-grid">

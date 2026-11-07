@@ -176,4 +176,45 @@ h2 {
     margin: 0;
 }
 
+.button-secondary {
+    margin-left: 0.5rem;
+    background: transparent;
+    border: 2px solid #fff;
+}
+
+.button-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* ---- Tablas ---- */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.data-table th,
+.data-table td {
+    padding: 0.7rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.data-table th {
+    color: #fff;
+    background: var(--color-primary);
+    font-weight: 600;
+}
+
+.data-table tbody tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
 /* ==== fin ==== */

@@ -14,4 +14,5 @@ ini_set('display_errors', $config['debug'] ? '1' : '0');
 date_default_timezone_set($config['timezone']);
 
 require_once __DIR__ . '/functions.php';
+require_once __DIR__ . '/data.php';
 require_once __DIR__ . '/components.php';
