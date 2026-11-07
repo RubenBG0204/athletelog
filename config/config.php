@@ -12,4 +12,16 @@ return [
     'timezone'     => 'Europe/Madrid',
     // Con true se muestran los errores de PHP; ponerlo a false al publicar.
     'debug'        => true,
+
+    // Límites de validación. Viven aquí para usarlos igual en el servidor
+    // (validateRegistration) y en los atributos HTML5 del formulario.
+    'rules' => [
+        'name_min'     => 3,
+        'name_max'     => 50,
+        'username_min' => 4,
+        'username_max' => 15,
+        'password_min' => 8,
+        'age_min'      => 16,
+        'age_max'      => 60,
+    ],
 ];

@@ -38,3 +38,74 @@ function renderSportsTable(array $sports): string
         . '<tbody>' . $rows . '</tbody>'
         . '</table>';
 }
+
+/** Clase CSS del contenedor de un campo: añade "has-error" si ese campo falló. */
+function fieldClass(array $errors, string $field, string $extra = ''): string
+{
+    $classes = trim('field ' . $extra . (isset($errors[$field]) ? ' has-error' : ''));
+
+    return e($classes);
+}
+
+/** Mensaje de error junto a su campo (cadena vacía si no hay error). */
+function renderFieldError(array $errors, string $field): string
+{
+    if (!isset($errors[$field])) {
+        return '';
+    }
+
+    return sprintf('<p class="field-error">%s</p>', e($errors[$field]));
+}
+
+/**
+ * Opciones de un <select> a partir de un array "clave => texto".
+ * La opción cuya clave coincide con $selected sale marcada (formulario sticky).
+ */
+function renderOptions(array $options, string $selected): string
+{
+    $html = '<option value="">— Elige una opción —</option>';
+    foreach ($options as $value => $label) {
+        $html .= sprintf(
+            '<option value="%s"%s>%s</option>',
+            e((string) $value),
+            (string) $value === $selected ? ' selected' : '',
+            e($label)
+        );
+    }
+
+    return $html;
+}
+
+/** Grupo de radio buttons a partir de "clave => texto". */
+function renderRadioGroup(string $name, array $options, string $selected): string
+{
+    $html = '';
+    foreach ($options as $value => $label) {
+        $html .= sprintf(
+            '<label class="choice"><input type="radio" name="%s" value="%s"%s> %s</label>',
+            e($name),
+            e((string) $value),
+            (string) $value === $selected ? ' checked' : '',
+            e($label)
+        );
+    }
+
+    return $html;
+}
+
+/** Grupo de checkboxes a partir de "clave => texto". El name lleva [] para que PHP reciba un array. */
+function renderCheckboxGroup(string $name, array $options, array $checked): string
+{
+    $html = '';
+    foreach ($options as $value => $label) {
+        $html .= sprintf(
+            '<label class="choice"><input type="checkbox" name="%s[]" value="%s"%s> %s</label>',
+            e($name),
+            e((string) $value),
+            in_array((string) $value, $checked, true) ? ' checked' : '',
+            e($label)
+        );
+    }
+
+    return $html;
+}

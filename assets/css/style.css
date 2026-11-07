@@ -217,4 +217,131 @@ h2 {
     border-bottom: 0;
 }
 
+/* ---- Formularios ---- */
+.form {
+    padding: 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.1rem 1.5rem;
+}
+
+.field {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.field-wide {
+    grid-column: 1 / -1;
+}
+
+.field > label,
+.field legend {
+    display: block;
+    margin-bottom: 0.35rem;
+    padding: 0;
+    font-weight: 600;
+}
+
+.field input:not([type="radio"]):not([type="checkbox"]),
+.field select {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    color: inherit;
+    font: inherit;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+}
+
+.field input:focus,
+.field select:focus {
+    outline: 3px solid rgba(232, 89, 12, 0.25);
+    border-color: var(--color-accent);
+}
+
+.choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+}
+
+.choice {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 400;
+}
+
+.field-hint {
+    margin: 0.3rem 0 0;
+    color: var(--color-muted);
+    font-size: 0.85rem;
+}
+
+.field-error {
+    margin: 0.35rem 0 0;
+    color: var(--color-error);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.has-error input:not([type="radio"]):not([type="checkbox"]),
+.has-error select {
+    background: var(--color-error-bg);
+    border-color: var(--color-error);
+}
+
+.form-actions {
+    margin-top: 1.5rem;
+}
+
+/* ---- Avisos ---- */
+.alert {
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.25rem;
+    border-left: 5px solid;
+    border-radius: 8px;
+}
+
+.alert ul {
+    margin: 0.5rem 0 0;
+    padding-left: 1.2rem;
+}
+
+.alert-error {
+    color: var(--color-error);
+    background: var(--color-error-bg);
+    border-color: var(--color-error);
+}
+
+.alert-success {
+    color: var(--color-success);
+    background: var(--color-success-bg);
+    border-color: var(--color-success);
+}
+
+/* ---- Resumen del alta ---- */
+.summary {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.4rem 1.5rem;
+    margin: 1rem 0 1.5rem;
+}
+
+.summary dt {
+    font-weight: 600;
+}
+
+.summary dd {
+    margin: 0;
+}
+
 /* ==== fin ==== */
