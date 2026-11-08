@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 /*
  * Punto de arranque común: cada página lo incluye con require_once.
- * Centralizar aquí las dependencias evita que cada página tenga que
- * acordarse de cargarlas (y de hacerlo en el orden correcto).
  */
 
 // 1. Configuración: config.php devuelve un array, que se guarda en $config.

@@ -3,15 +3,10 @@ declare(strict_types=1);
 
 /*
  * Funciones de utilidad y de validación.
- * No imprimen nada: reciben datos y devuelven un resultado, así se pueden
- * probar por separado y reutilizar desde cualquier página.
  */
 
 /**
  * Escapa un texto para imprimirlo de forma segura en HTML.
- *
- * Es un atajo de htmlspecialchars(): así no repetimos los flags ni el
- * charset en cada vista y es más difícil olvidarse de escapar.
  */
 function e(string $value): string
 {
@@ -20,9 +15,6 @@ function e(string $value): string
 
 /**
  * Devuelve solo los deportes de una categoría ('individual' o 'equipo').
- *
- * array_filter() conserva las claves ('running', 'football'...), que
- * necesitamos más adelante para los formularios y la validación.
  */
 function getSportsByCategory(array $sports, string $category): array
 {
@@ -164,7 +156,6 @@ function validateRegistration(
     }
 
     // Días de entrenamiento: al menos uno, y todos deben existir en $trainingDays.
-    // array_diff() devuelve los días enviados que no están en la lista de días válidos.
     if ($values['days'] === []) {
         $errors['days'] = 'Marca al menos un día de entrenamiento.';
     } elseif (array_diff($values['days'], array_keys($trainingDays)) !== []) {
@@ -175,7 +166,6 @@ function validateRegistration(
     if (!$values['privacy']) {
         $errors['privacy'] = 'Debes aceptar el tratamiento de tus datos para registrarte.';
     }
-
     // Array vacío = formulario válido.
     return $errors;
 }

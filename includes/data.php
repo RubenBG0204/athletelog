@@ -3,10 +3,6 @@ declare(strict_types=1);
 
 /*
  * Datos maestros de la aplicación.
- *
- * Son arrays asociativos: la clave es un identificador estable ('running')
- * y el valor es lo que se muestra al usuario. Los formularios envían la clave,
- * así que validar un campo consiste en comprobar que esa clave existe aquí.
  */
 
 // DEPORTES. Clave => ['name' => texto visible, 'category' => 'individual' | 'equipo',

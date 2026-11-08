@@ -2,9 +2,7 @@
 declare(strict_types=1);
 
 /*
- * CAPA 1 DEL LAYOUT: cabecera del documento.
- * Abre <html>, <head> y <body>. El <body> y el <html> se cierran en footer.php,
- * por eso este fichero y el footer se incluyen siempre en pareja.
+CAPA 1 DEL LAYOUT: cabecera del documento.
  */
 
 // Cada página define $pageTitle antes de incluir este fichero.
@@ -14,7 +12,7 @@ $pageTitle = $pageTitle ?? 'Inicio';
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <?php /* Codificación de caracteres: necesaria para que se vean bien las tildes y la ñ. */ ?>
+    <?php ?>
     <meta charset="UTF-8">
     <?php /* Hace que la página se adapte al ancho de la pantalla en móviles. */ ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">

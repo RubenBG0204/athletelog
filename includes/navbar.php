@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 /*
  * CAPA 2 DEL LAYOUT: barra de navegación.
- * Pinta el menú a partir de un array y resalta el enlace de la página actual.
  */
 
 // Fichero => texto del enlace. Añadir una página al menú es añadir una línea.
@@ -27,7 +26,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <ul class="nav-links">
             <?php /* Un <li> por cada elemento de $navLinks. */ ?>
             <?php foreach ($navLinks as $file => $label): ?>
-                <?php /* Solo el enlace de la página actual lleva la clase "active" (se ve resaltado). */ ?>
                 <?php $activeAttrs = $file === $currentPage ? ' class="active" aria-current="page"' : ''; ?>
                 <li>
                     <a href="<?= e($file) ?>"<?= $activeAttrs ?>><?= e($label) ?></a>

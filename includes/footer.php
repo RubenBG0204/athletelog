@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 /*
  * CAPA 3 DEL LAYOUT: pie de página.
- * Muestra el copyright y cierra el <body> y el <html> que abrió header.php.
  */
 ?>
 <footer class="site-footer">
