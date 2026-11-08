@@ -61,17 +61,6 @@ require_once __DIR__ . '/includes/navbar.php';
     <?php else: ?>
         <p class="lead">Crea tu perfil de deportista. Todos los campos son obligatorios.</p>
 
-        <?php if ($errors !== []): ?>
-            <div class="alert alert-error" role="alert">
-                <strong>Revisa el formulario: hay <?= count($errors) ?> error(es).</strong>
-                <ul>
-                    <?php foreach ($errors as $message): ?>
-                        <li><?= e($message) ?></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        <?php endif; ?>
-
         <?php /* novalidate: desactiva los avisos del navegador para que la validación que cuenta, la del servidor, se vea siempre. */ ?>
         <form class="form" method="post" action="register.php" novalidate>
             <div class="form-grid">

@@ -311,17 +311,6 @@ h2 {
     border-radius: 8px;
 }
 
-.alert ul {
-    margin: 0.5rem 0 0;
-    padding-left: 1.2rem;
-}
-
-.alert-error {
-    color: var(--color-error);
-    background: var(--color-error-bg);
-    border-color: var(--color-error);
-}
-
 .alert-success {
     color: var(--color-success);
     background: var(--color-success-bg);
