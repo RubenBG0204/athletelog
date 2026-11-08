@@ -1,14 +1,18 @@
 <?php
 declare(strict_types=1);
 
+// Arranque común: configuración, funciones y datos.
 require_once __DIR__ . '/includes/bootstrap.php';
 
+// Título que usará header.php en la pestaña del navegador.
 $pageTitle = 'Inicio';
 
+// Capas superiores del layout: cabecera del documento y menú.
 require_once __DIR__ . '/includes/header.php';
 require_once __DIR__ . '/includes/navbar.php';
 ?>
 <main class="container">
+    <?php /* Bloque de bienvenida con la descripción de la app y los botones principales. */ ?>
     <section class="hero">
         <h1>Bienvenido a <?= e($config['app_name']) ?></h1>
         <p class="lead">
@@ -19,6 +23,7 @@ require_once __DIR__ . '/includes/navbar.php';
         <a class="button button-secondary" href="sports.php">Ver deportes</a>
     </section>
 
+    <?php /* Tres tarjetas que resumen qué se puede hacer con la app. */ ?>
     <section class="feature-grid">
         <article class="card">
             <h3>Regístrate</h3>
@@ -34,4 +39,5 @@ require_once __DIR__ . '/includes/navbar.php';
         </article>
     </section>
 </main>
+<?php /* Capa inferior del layout: pie de página y cierre del documento. */ ?>
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

@@ -1,6 +1,12 @@
 <?php
 declare(strict_types=1);
 
+/*
+ * Componentes de interfaz: funciones que devuelven un trozo de HTML.
+ * Se usan desde varias páginas para no repetir el mismo código (DRY).
+ * Todo texto que se imprime pasa por e() para escaparlo.
+ */
+
 /**
  * Bloque para las secciones que todavía no están construidas.
  * Se reutiliza en varias páginas en lugar de copiar el mismo HTML.
@@ -19,10 +25,12 @@ function renderComingSoon(string $section): string
  */
 function renderSportsTable(array $sports): string
 {
+    // Sin deportes no tiene sentido pintar una tabla vacía.
     if ($sports === []) {
         return '<p>No hay deportes en esta categoría.</p>';
     }
 
+    // Una fila <tr> por deporte: clave, nombre y unidad.
     $rows = '';
     foreach ($sports as $key => $sport) {
         $rows .= sprintf(
@@ -33,6 +41,7 @@ function renderSportsTable(array $sports): string
         );
     }
 
+    // Se une la cabecera con las filas generadas.
     return '<table class="data-table">'
         . '<thead><tr><th>Clave</th><th>Deporte</th><th>Unidad</th></tr></thead>'
         . '<tbody>' . $rows . '</tbody>'
@@ -50,6 +59,7 @@ function fieldClass(array $errors, string $field, string $extra = ''): string
 /** Mensaje de error junto a su campo (cadena vacía si no hay error). */
 function renderFieldError(array $errors, string $field): string
 {
+    // Si ese campo no tiene error, no se pinta nada.
     if (!isset($errors[$field])) {
         return '';
     }
@@ -63,7 +73,10 @@ function renderFieldError(array $errors, string $field): string
  */
 function renderOptions(array $options, string $selected): string
 {
+    // Primera opción vacía: obliga a elegir una de verdad (su valor '' no existe en $sports).
     $html = '<option value="">— Elige una opción —</option>';
+
+    // Una <option> por elemento; la que coincide con $selected lleva el atributo "selected".
     foreach ($options as $value => $label) {
         $html .= sprintf(
             '<option value="%s"%s>%s</option>',
@@ -79,6 +92,7 @@ function renderOptions(array $options, string $selected): string
 /** Grupo de radio buttons a partir de "clave => texto". */
 function renderRadioGroup(string $name, array $options, string $selected): string
 {
+    // Un radio por elemento; el que coincide con $selected sale marcado (sticky).
     $html = '';
     foreach ($options as $value => $label) {
         $html .= sprintf(
@@ -96,6 +110,8 @@ function renderRadioGroup(string $name, array $options, string $selected): strin
 /** Grupo de checkboxes a partir de "clave => texto". El name lleva [] para que PHP reciba un array. */
 function renderCheckboxGroup(string $name, array $options, array $checked): string
 {
+    // Un checkbox por elemento; los que están en $checked salen marcados (sticky).
+    // in_array() con true compara también el tipo, para no confundir "1" con 1.
     $html = '';
     foreach ($options as $value => $label) {
         $html .= sprintf(

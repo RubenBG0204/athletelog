@@ -9,7 +9,8 @@ declare(strict_types=1);
  * así que validar un campo consiste en comprobar que esa clave existe aquí.
  */
 
-// Deportes disponibles. category: 'individual' | 'equipo'. unit: unidad en que se mide el entrenamiento.
+// DEPORTES. Clave => ['name' => texto visible, 'category' => 'individual' | 'equipo',
+// 'unit' => unidad en que se mide el entrenamiento]. Los usan sports.php y el registro.
 $sports = [
     'running'       => ['name' => 'Running',      'category' => 'individual', 'unit' => 'km'],
     'swimming'      => ['name' => 'Natación',     'category' => 'individual', 'unit' => 'metros'],
@@ -21,7 +22,7 @@ $sports = [
     'handball'      => ['name' => 'Balonmano',    'category' => 'equipo',     'unit' => 'minutos'],
 ];
 
-// Niveles competitivos.
+// NIVELES COMPETITIVOS. Clave => texto visible. Generan los radio buttons del registro.
 $levels = [
     'beginner'      => 'Iniciación',
     'regional'      => 'Regional',
@@ -29,7 +30,8 @@ $levels = [
     'international' => 'Internacional',
 ];
 
-// Días de la semana para el formulario de registro (el orden es el de la semana).
+// DÍAS DE LA SEMANA. Clave => texto visible. Generan los checkboxes del registro
+// (el orden del array es el orden en que se muestran).
 $trainingDays = [
     'mon' => 'Lunes',
     'tue' => 'Martes',
@@ -40,8 +42,9 @@ $trainingDays = [
     'sun' => 'Domingo',
 ];
 
-// Usuarios de prueba. Solo se guarda el hash generado con password_hash(),
-// nunca la contraseña en texto plano.
+// USUARIOS DE PRUEBA. 'nombre_de_usuario' => ['name', 'password_hash', 'sport'].
+// Solo se guarda el hash generado con password_hash(), nunca la contraseña en texto plano.
+// 'sport' es una clave de $sports.
 $users = [
     'ana_runner'  => [
         'name'          => 'Ana Puig',

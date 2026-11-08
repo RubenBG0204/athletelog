@@ -1,6 +1,11 @@
 <?php
 declare(strict_types=1);
 
+/*
+ * CAPA 2 DEL LAYOUT: barra de navegación.
+ * Pinta el menú a partir de un array y resalta el enlace de la página actual.
+ */
+
 // Fichero => texto del enlace. Añadir una página al menú es añadir una línea.
 $navLinks = [
     'index.php'       => 'Inicio',
@@ -11,14 +16,18 @@ $navLinks = [
     'preferences.php' => 'Preferencias',
 ];
 
-// basename() deja solo el nombre del fichero ("/athletelog/index.php" => "index.php").
+// Nombre del fichero que se está visitando, para saber qué enlace resaltar.
+// basename() deja solo el nombre ("/athletelog/index.php" => "index.php").
 $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 <header class="site-header">
     <nav class="navbar" aria-label="Navegación principal">
+        <?php /* Nombre de la app: sirve también de enlace a la portada. */ ?>
         <a class="brand" href="index.php"><?= e($config['app_name']) ?></a>
         <ul class="nav-links">
+            <?php /* Un <li> por cada elemento de $navLinks. */ ?>
             <?php foreach ($navLinks as $file => $label): ?>
+                <?php /* Solo el enlace de la página actual lleva la clase "active" (se ve resaltado). */ ?>
                 <?php $activeAttrs = $file === $currentPage ? ' class="active" aria-current="page"' : ''; ?>
                 <li>
                     <a href="<?= e($file) ?>"<?= $activeAttrs ?>><?= e($label) ?></a>

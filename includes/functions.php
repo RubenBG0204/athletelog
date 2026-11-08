@@ -1,6 +1,12 @@
 <?php
 declare(strict_types=1);
 
+/*
+ * Funciones de utilidad y de validación.
+ * No imprimen nada: reciben datos y devuelven un resultado, así se pueden
+ * probar por separado y reutilizar desde cualquier página.
+ */
+
 /**
  * Escapa un texto para imprimirlo de forma segura en HTML.
  *
@@ -20,6 +26,7 @@ function e(string $value): string
  */
 function getSportsByCategory(array $sports, string $category): array
 {
+    // Se queda con los deportes cuya 'category' coincide con la pedida.
     return array_filter(
         $sports,
         static fn(array $sport): bool => $sport['category'] === $category
@@ -34,7 +41,10 @@ function getSportsByCategory(array $sports, string $category): array
  */
 function readString(array $input, string $key, bool $trim = true): string
 {
+    // Si el campo no existe se usa '' como valor por defecto.
     $value = $input[$key] ?? '';
+
+    // Un atacante puede enviar campo[]=x, que llega como array: se descarta.
     if (!is_string($value)) {
         return '';
     }
@@ -51,16 +61,21 @@ function readRegistrationInput(array $input): array
     $days = $input['days'] ?? [];
 
     return [
+        // Campos de texto: se leen como string y se recortan los espacios de los extremos.
         'fullname'  => readString($input, 'fullname'),
         'username'  => readString($input, 'username'),
         'email'     => readString($input, 'email'),
+        // Contraseñas: sin recortar, porque un espacio puede formar parte de la clave.
         'password'  => readString($input, 'password', false),
         'password2' => readString($input, 'password2', false),
+        // La edad se guarda como texto; se convierte a entero al validarla.
         'age'       => readString($input, 'age'),
+        // Deporte y nivel: llegan como clave de $sports y $levels.
         'sport'     => readString($input, 'sport'),
         'level'     => readString($input, 'level'),
         // Solo se aceptan textos: un array anidado nunca será un día válido.
         'days'      => is_array($days) ? array_values(array_filter($days, 'is_string')) : [],
+        // Un checkbox sin marcar no se envía; marcado envía "yes". Se convierte a true/false.
         'privacy'   => readString($input, 'privacy') === 'yes',
     ];
 }
@@ -77,6 +92,7 @@ function validateRegistration(
     array $trainingDays,
     array $rules
 ): array {
+    // Aquí se acumulan los errores, uno por campo.
     $errors = [];
 
     // Nombre completo: no vacío y entre 3 y 50 caracteres (mb_strlen cuenta bien las tildes).
@@ -109,7 +125,7 @@ function validateRegistration(
         );
     }
 
-    // Email
+    // Email: se comprueba con el validador de formato que trae PHP.
     if ($values['email'] === '') {
         $errors['email'] = 'El email es obligatorio.';
     } elseif (filter_var($values['email'], FILTER_VALIDATE_EMAIL) === false) {
@@ -148,6 +164,7 @@ function validateRegistration(
     }
 
     // Días de entrenamiento: al menos uno, y todos deben existir en $trainingDays.
+    // array_diff() devuelve los días enviados que no están en la lista de días válidos.
     if ($values['days'] === []) {
         $errors['days'] = 'Marca al menos un día de entrenamiento.';
     } elseif (array_diff($values['days'], array_keys($trainingDays)) !== []) {
@@ -159,5 +176,6 @@ function validateRegistration(
         $errors['privacy'] = 'Debes aceptar el tratamiento de tus datos para registrarte.';
     }
 
+    // Array vacío = formulario válido.
     return $errors;
 }
